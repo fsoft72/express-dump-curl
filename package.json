@@ -1,0 +1,9 @@
+{
+  "version": "0.1.0",
+  "name": "express-dump-curl",
+  "description": "ExpressJS middleware to dump received requests as curls",
+  "keywords": [ "express", "curl", "dump", "debug" ],
+  "main": "index.js",
+  "repository": "git@github.com:fsoft72/express-dump-curl.git",
+  "license": "MIT"
+}
