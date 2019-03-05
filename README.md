@@ -48,3 +48,5 @@ app.use('/users', usersRouter);
 ```
 
 From now on, every single call will be logged on console or file depending on your configuration.
+
+* Inspired by: https://github.com/sahilnarain/express-curl
