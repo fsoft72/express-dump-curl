@@ -8,20 +8,24 @@ The `curl` dump can be written in standard output or on a specific file and it i
 ## Installation
 Install the package by running one of the following commands, depending on your configuration:
 
-```npm install --save express-dump-curl```
+```bash
+npm install --save express-dump-curl
+```
 
-```yarn add express-dump-curl```
+```bash
+yarn add express-dump-curl
+```
 
 
 ## Usage
 1. Include the package in your ExpressJS app along with other dependencies.
 
-```
+```javascript
 const fs = require ( 'fs' );
 const express = require ( 'express' );
 
 // Include express-dump-curl as a dependency
-const dump_curl = require ( 'express-curl' );
+const dump_curl = require ( 'express-dump-curl' );
 
 const app = express ();
 ...
@@ -29,7 +33,7 @@ const app = express ();
 
 2. Declare this as a middleware just above the route definitions
 
-```
+```javascript
 app.use ( bodyParser.json() );
 app.use ( multiplart() );
 ...
