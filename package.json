@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.1.1",
   "name": "express-dump-curl",
   "description": "ExpressJS middleware to dump received requests as curls",
   "keywords": [ "express", "curl", "dump", "debug" ],

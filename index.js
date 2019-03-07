@@ -1,5 +1,5 @@
 /*
- * dump_curl v 0.1 - By Fabio Rotondo (fabio.rotondo@gmail.com)
+ * dump_curl v 0.1.1 - By Fabio Rotondo (fabio.rotondo@gmail.com)
  * 
  * Inspired by: https://github.com/sahilnarain/express-curl
 */
