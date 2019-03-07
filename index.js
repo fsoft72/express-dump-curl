@@ -38,11 +38,12 @@ const _build = ( params ) =>
 	}
 };
 
-const _dump_curl = function ( output_fname, req, res, next ) 
+const _dump_curl = function ( output_fname, force_https, req, res, next ) 
 {
-	var params = {};
+	const params = {};
+	const prot = force_https ? "https" : req.protocol;
 
-	params.url  = req.protocol + '://' + ( req.headers.host || req.hostname ) + req.originalUrl;
+	params.url  = prot + '://' + ( req.headers.host || req.hostname ) + req.originalUrl;
 	params.verb = req.method.toUpperCase();
 	req.headers ? params.headers = req.headers : null;
 	req.body ? params.body = req.body : null;
@@ -55,6 +56,6 @@ const _dump_curl = function ( output_fname, req, res, next )
 	next();
 };
 
-const dump_curl = ( output_fname ) => ( req, res, next ) => _dump_curl ( output_fname, req, res, next );
+const dump_curl = ( output_fname, force_https = false ) => ( req, res, next ) => _dump_curl ( output_fname, force_https, req, res, next );
 
 module.exports = dump_curl;

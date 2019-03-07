@@ -38,6 +38,16 @@ app.use ( bodyParser.json() );
 app.use ( multiplart() );
 ...
 
+Parameters of the dump_curl () middleware are two at the moment:
+//
+dump_curl ( output_file,  force_https )
+//
+- output_file   - a complete filepath where to save the curls.
+                  if the path is not specified, stdout will be used.
+//
+- force_https   - a flag T/F. If true, the protocol of the CURL will always
+                  be "https" reguardless of the real protocol used.
+
 // Include the express dump curl middleware
 // if no filename is specified in the call, console.log will be
 // used to dump curls
@@ -53,4 +63,12 @@ app.use('/users', usersRouter);
 
 From now on, every single call will be logged on console or file depending on your configuration.
 
-* Inspired by: https://github.com/sahilnarain/express-curl
+Parameters of the `dump_curl()` middleware are two at the moment:
+
+`dump_curl ( output_file,  force_https )`
+
+ - `output_file`   - a complete filepath where to save the curls.
+                   if the path is not specified, stdout will be used.
+
+ - `force_https`   - a flag T/F. If true, the protocol of the CURL will always
+                   be "https" reguardless of the real protocol used.
