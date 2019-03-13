@@ -1,5 +1,7 @@
 /*
- * dump_curl v 0.1.1 - By Fabio Rotondo (fabio.rotondo@gmail.com)
+ * dump_curl v 0.2.0 - By Fabio Rotondo (fabio.rotondo@gmail.com)
+ * 
+ * 0.2.0 - Removed a nasty bug that used to mangle multipart form submissions
  * 
  * Inspired by: https://github.com/sahilnarain/express-curl
 */
@@ -17,7 +19,6 @@ const _build = ( params ) =>
 
 			for ( let key in params.headers ) _headers.push ( `-H '${key}:${params.headers[key]}'` );
 		}
-
 
 		if ( params.body ) 
 		{
@@ -45,15 +46,20 @@ const _dump_curl = function ( output_fname, force_https, req, res, next )
 
 	params.url  = prot + '://' + ( req.headers.host || req.hostname ) + req.originalUrl;
 	params.verb = req.method.toUpperCase();
-	req.headers ? params.headers = req.headers : null;
-	req.body ? params.body = req.body : null;
+
+	req.headers ? params.headers = { ...req.headers } : null;
+	req.body ? params.body = { ...req.body } : null;
+
+	const cx = _build ( params );
 
 	if ( ! output_fname ) 
-		console.log ( `${_build(params)}` );
+		console.log ( cx );
 	else
-		fs.appendFileSync ( output_fname, `${_build(params)}` );
+	{
+		fs.appendFileSync ( output_fname, cx );
+	}
 
-	next();
+	next ();
 };
 
 const dump_curl = ( output_fname, force_https = false ) => ( req, res, next ) => _dump_curl ( output_fname, force_https, req, res, next );
