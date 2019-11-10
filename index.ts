@@ -39,9 +39,7 @@ const _build_restest = ( params: IParams ): string =>
 
 	try {
 		if ( params.body )
-		{
 			for ( const key in params.body ) _body.push ( `				"${key}": "${_safe(params.body[key])}"` );
-		}
 
 		const heads: string  = _headers.join ( ",\n" );
 		const body: string   = _body.join ( ",\n" );
@@ -66,6 +64,8 @@ ${url}${_params}
 	} catch ( e ) {
 		console.error ( e );
 	}
+
+	return '';
 };
 
 const _build_curl = ( params: IParams ): string =>
@@ -98,6 +98,8 @@ const _build_curl = ( params: IParams ): string =>
 	} catch ( e ) {
 		console.error ( e );
 	}
+
+	return '';
 };
 
 export const curl_str = ( force_https: boolean, req: Request ): string =>
@@ -150,12 +152,11 @@ const _dump_restest = function ( output_fname: string, force_https: boolean, req
 	next ();
 };
 
-export const dump_curl    = ( output_fname, force_https = false ) => ( req: Request, res: Response, next: NextFunction ) => _dump_curl ( output_fname, force_https, req, res, next );
-export const dump_restest = ( output_fname, force_https = false ) => ( req: Request, res: Response, next: NextFunction ) => _dump_restest ( output_fname, force_https, req, res, next );
-
-/*
-module.exports.default = dump_curl;
-module.exports.dump_restest = dump_restest;
-module.exports.dump_curl = dump_curl;
-module.exports.curl_str = curl_str;
-*/
+/**
+ *	dump_curl ( output_fname: string, force_https: boolean = false )
+ *
+ *  @param output_fname - The full path where the curl will be written. If it is null or '', the curl will be printed on stdout
+ *  @param force_https  - Sometimes, external endpoints are in HTTPS, but nginx or apache calls node in HTTP (due to proxy configuration) Set this to ``true`` to force ``https`` protocol.
+ */
+export const dump_curl    = ( output_fname: string, force_https: boolean = false ) => ( req: Request, res: Response, next: NextFunction ) => _dump_curl ( output_fname, force_https, req, res, next );
+export const dump_restest = ( output_fname: string, force_https: boolean = false ) => ( req: Request, res: Response, next: NextFunction ) => _dump_restest ( output_fname, force_https, req, res, next );

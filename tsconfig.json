@@ -9,5 +9,6 @@
     "outDir": ".",
     "sourceMap": true,
     "target": "es2018"
-  }
+  },
+  "files": [ "index.ts" ]
 }
