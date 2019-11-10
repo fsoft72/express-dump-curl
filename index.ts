@@ -13,7 +13,7 @@
  *
  * Inspired by: https://github.com/sahilnarain/express-curl
 */
-import * as fs from "fs";
+import { appendFileSync } from "fs";
 import { Request, NextFunction, Response } from "express-serve-static-core";
 
 interface IParams
@@ -124,7 +124,7 @@ const _dump_curl = function ( output_fname: string, force_https: boolean, req: R
 		console.log ( cx );
 	else
 	{
-		fs.appendFileSync ( output_fname, cx );
+		appendFileSync ( output_fname, cx );
 	}
 
 	next ();
@@ -135,7 +135,7 @@ const _dump_restest = function ( output_fname: string, force_https: boolean, req
 	const params: IParams = { url: null, verb: null, headers: {}, body: {} };
 
 	params.url  = req.originalUrl;
-	params.verb = req.method.toLowerCase();
+	params.verb = req.method.toLowerCase ();
 
 	if ( req.headers ) params.headers = { ...req.headers };
 	if ( req.body )    params.body = { ...req.body };
@@ -146,7 +146,7 @@ const _dump_restest = function ( output_fname: string, force_https: boolean, req
 		console.log ( cx );
 	else
 	{
-		fs.appendFileSync ( output_fname, cx );
+		appendFileSync ( output_fname, cx );
 	}
 
 	next ();

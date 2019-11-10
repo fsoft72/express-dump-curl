@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /*
  * dump_curl v 0.5.0 - By Fabio Rotondo (fabio.rotondo@gmail.com)
  *
@@ -13,7 +15,7 @@
  *
  * Inspired by: https://github.com/sahilnarain/express-curl
 */
-import * as fs from "fs";
+const fs_1 = require("fs");
 const _safe = (txt) => {
     const s = JSON.stringify(txt);
     if (s.charAt(0) === '"')
@@ -78,7 +80,7 @@ const _build_curl = (params) => {
     }
     return '';
 };
-export const curl_str = (force_https, req) => {
+exports.curl_str = (force_https, req) => {
     const params = { url: null, verb: null, headers: {}, body: {} };
     const prot = force_https ? "https" : req.protocol;
     params.url = prot + '://' + (req.headers.host || req.hostname) + req.originalUrl;
@@ -90,11 +92,11 @@ export const curl_str = (force_https, req) => {
     return _build_curl(params);
 };
 const _dump_curl = function (output_fname, force_https, req, res, next) {
-    const cx = curl_str(force_https, req);
+    const cx = exports.curl_str(force_https, req);
     if (!output_fname)
         console.log(cx);
     else {
-        fs.appendFileSync(output_fname, cx);
+        fs_1.appendFileSync(output_fname, cx);
     }
     next();
 };
@@ -110,7 +112,7 @@ const _dump_restest = function (output_fname, force_https, req, res, next) {
     if (!output_fname)
         console.log(cx);
     else {
-        fs.appendFileSync(output_fname, cx);
+        fs_1.appendFileSync(output_fname, cx);
     }
     next();
 };
@@ -120,6 +122,6 @@ const _dump_restest = function (output_fname, force_https, req, res, next) {
  *  @param output_fname - The full path where the curl will be written. If it is null or '', the curl will be printed on stdout
  *  @param force_https  - Sometimes, external endpoints are in HTTPS, but nginx or apache calls node in HTTP (due to proxy configuration) Set this to ``true`` to force ``https`` protocol.
  */
-export const dump_curl = (output_fname, force_https = false) => (req, res, next) => _dump_curl(output_fname, force_https, req, res, next);
-export const dump_restest = (output_fname, force_https = false) => (req, res, next) => _dump_restest(output_fname, force_https, req, res, next);
+exports.dump_curl = (output_fname, force_https = false) => (req, res, next) => _dump_curl(output_fname, force_https, req, res, next);
+exports.dump_restest = (output_fname, force_https = false) => (req, res, next) => _dump_restest(output_fname, force_https, req, res, next);
 //# sourceMappingURL=index.js.map

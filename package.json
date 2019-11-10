@@ -16,6 +16,7 @@
     "@types/node": "^12.12.7"
   },
   "scripts": {
-	  "build": "tsc index.ts"
+	  "build": "tsc --build",
+	  "dev": "tsc --build -w"
   }
 }
