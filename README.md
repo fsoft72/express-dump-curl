@@ -25,7 +25,7 @@ const fs = require ( 'fs' );
 const express = require ( 'express' );
 
 // Include express-dump-curl as a dependency
-const dump_curl = require ( 'express-dump-curl' );
+const dump_curl = require ( 'express-dump-curl' ).dump_curl;
 
 const app = express ();
 ...
@@ -72,3 +72,13 @@ There are two parameters you can pass at the `dump_curl()` middleware:
 
  - `force_https`   - a flag T/F. If true, the protocol of the CURL will always
                    be "https" reguardless of the real protocol used.
+
+## Additional APIs
+
+You can do even more with this module, in fact there are two extra methods you can use in your software.
+
+`dump_restest ( output_file, force_https )`
+
+Is identical to `dump_curl()` but it dumps a JSON in RESTest format (the RESTest application has not been delivered yet).
+
+`curl_str ( force_https )`  returns a string with the CURL. The method is the same used inside `dump_curl()`
